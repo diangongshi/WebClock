@@ -1,3 +1,30 @@
+
+
+function fullscreen() {
+	var de = document.documentElement;
+	if (de.requestFullscreen) {
+		de.requestFullscreen();
+	} else if (de.mozRequestFullScreen) {
+		de.mozRequestFullScreen();
+	} else if (de.webkitRequestFullScreen) {
+		de.webkitRequestFullScreen();
+	}
+}
+fullscreen();
+
+//退出全屏
+function exitFullscreen() {
+	var de = document;
+	if (de.exitFullscreen) {
+		de.exitFullscreen();
+	} else if (de.mozCancelFullScreen) {
+		de.mozCancelFullScreen();
+	} else if (de.webkitCancelFullScreen) {
+		de.webkitCancelFullScreen();
+	}
+}
+exitFullscreen();
+
 var colorIndex = 0;
 function changeBackgroundColor(){
 	if(colorIndex == 0){
@@ -14,8 +41,11 @@ function changeBackgroundColor(){
 	}
 	else{
 		colorIndex = 0;
-	} 
+	}
+
+	fullscreen();
 }
+changeBackgroundColor();
 
 function fontS(){
     //  获取 html 元素.获取 html 的宽
@@ -25,7 +55,7 @@ function fontS(){
     document.getElementById("date").style.fontSize = hW / 20 + "px";
 }
 fontS();
-window.onresize = function(){fontS();time();} // 当窗口大小改变时执行函数 
+window.onresize = function(){fontS();time();fullscreen();} // 当窗口大小改变时执行函数
 
 function time(){
 	var vWeek,vWeek_s,vDay;
@@ -40,3 +70,5 @@ function time(){
 };
 time();
 setInterval("time()",1000);
+
+
